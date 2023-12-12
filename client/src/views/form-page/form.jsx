@@ -30,7 +30,13 @@ export const Form = () => {
         console.log(gameProps);
     }
 
-    const choseGenre = (event) => {
+    const handlePlataforms = (event) => {
+        event.preventDefault()
+        const input = document.getElementById("input_plataforms")
+        
+    }
+
+    const handleGenres = (event) => {
         event.preventDefault()
         const button = event.target;
         const value = event.target.value
@@ -40,6 +46,7 @@ export const Form = () => {
             button.classList.add(style.genre_button_selected)
         }else{
             button.classList.remove(style.genre_button_selected)
+            setGameProps({...gameProps, genres: gameProps.genres.filter((g) => g !== value)})
         }
 
         
@@ -79,7 +86,7 @@ export const Form = () => {
 
                     <p className={style.error}>{errors.plataforms}</p>
                     <label className={style.label} htmlFor="plataforms">Plataforms</label>
-                    <input className={style.input} type="text" name='plataforms' value={gameProps.plataforms} onChange={handleChange}/>
+                    <input className={style.input} type="text" name='plataforms' id="input_plataforms" value={gameProps.plataforms} onChange={handleChange}/>
                     <button className={style.add_button}>Add</button>
                 </div>
 
@@ -119,7 +126,7 @@ export const Form = () => {
                         <div className={style.dropdown_content}>
                             {genres.map((genre) => {
                                 return(
-                                    <button className={style.genre_button} value={genre.id} name= "genres" onClick={choseGenre}>{genre.name}</button>
+                                    <button className={style.genre_button} value={genre.id} name= "genres" onClick={handleGenres}>{genre.name}</button>
                                 )
                             })}
 
