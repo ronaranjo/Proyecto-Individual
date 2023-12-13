@@ -24,16 +24,22 @@ export const Form = () => {
     function handleChange(event){
         const property = event.target.name;
         const value = event.target.value;
+        
 
         setGameProps({...gameProps, [property]:value})
         validations({...gameProps, [property]:value},errors, setErrors)
-        console.log(gameProps);
+        
     }
 
     const handlePlataforms = (event) => {
         event.preventDefault()
-        const input = document.getElementById("input_plataforms")
-        
+        const value = document.getElementById("input_plataforms").value
+        console.log(value);
+        if(!gameProps.plataforms.includes(value.toLowerCase())){
+            setGameProps({...gameProps, plataforms:[...gameProps.plataforms, value.toLowerCase()]})
+        }
+
+        console.log(gameProps.plataforms);
     }
 
     const handleGenres = (event) => {
@@ -86,8 +92,8 @@ export const Form = () => {
 
                     <p className={style.error}>{errors.plataforms}</p>
                     <label className={style.label} htmlFor="plataforms">Plataforms</label>
-                    <input className={style.input} type="text" name='plataforms' id="input_plataforms" value={gameProps.plataforms} onChange={handleChange}/>
-                    <button className={style.add_button}>Add</button>
+                    <input className={style.input} type="text" name='plataforms' id="input_plataforms" />
+                    <button className={style.add_button} onClick={handlePlataforms}>Add</button>
                 </div>
 
                 <div className={style.input_container} >
