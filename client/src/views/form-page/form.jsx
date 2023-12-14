@@ -10,7 +10,7 @@ export const Form = () => {
 
     const [gameProps, setGameProps] = useState({
         name:'',
-        image:'',
+        image: null,
         description: '',
         plataforms: [],
         release:'',
@@ -62,6 +62,25 @@ export const Form = () => {
     function handleSubmit(event){
         event.preventDefault()
         //se sube el archivo
+
+    }
+
+    const guardarImgString = (event) => {
+        event.preventDefault()
+        let image = document.getElementById("file").files[0]
+        let reader = new FileReader()
+
+        reader.onload = (e) => {
+            let imageData = e.target.result;
+            setGameProps({...gameProps, image: imageData})
+        }
+
+        reader.readAsDataURL(image)
+        
+    }
+
+    const retornarImg = () => {
+        
     }
 
     return (
@@ -77,8 +96,10 @@ export const Form = () => {
                 <div className={style.input_container} >
 
                     <p className={style.error}>{errors.image}</p>
-                    <label className={style.label} htmlFor="image">Image (url)</label>
-                    <input className={style.input} type="text" name='image' value={gameProps.image} onChange={handleChange}/>
+                    <input type="file"  id="file"/>
+                    <img src={gameProps.image} alt="" />
+                    <button onClick={guardarImgString}> Guardar img</button>
+
                 </div>
 
                 <div className={style.input_container} >
