@@ -14,19 +14,14 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
 
-    description:{
-      type: DataTypes.TEXT,
-      defaultValue: ""
-    },
-
-    plataforms:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false
-    },
-
     image:{
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    description:{
+      type: DataTypes.TEXT,
+      defaultValue: ""
     },
 
     release:{

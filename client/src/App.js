@@ -6,7 +6,7 @@ import { Form } from './views/form-page/form';
 import {NavBar} from "./components/NavBar/navBar"
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react"
-import { getAllGames, getGenres } from './redux/actions';
+import { getAllGames, getGenres, getPlatforms } from './redux/actions';
 
 function App() {
 
@@ -15,7 +15,9 @@ function App() {
   useEffect(() =>{
     dispatch(getAllGames())
     dispatch(getGenres())
+    dispatch(getPlatforms())
   })
+
 
   return (
     <div className="App">

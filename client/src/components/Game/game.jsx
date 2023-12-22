@@ -3,16 +3,20 @@ import { Link } from "react-router-dom"
 
 export const Game = (props) => {
     const{id, name, image, genres} = props
+    console.log(genres);
     return(
         <div className={style.main_container}>
             <img className={style.img} src={image} alt="" />
             <p className={style.name}>{name}</p>
+
+            <p className={style.genres_text}>Genres</p>
             <div className={style.genres}>
-                {genres.forEach(gen => {
+
+                {genres.map((gen) => {
                     return(
-                        <p>{gen.name}</p>
+                        <p className={style.genre_name}>{gen.name}</p>
                     )
-                })};
+                })}
             </div>
         </div>
     )

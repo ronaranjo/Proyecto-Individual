@@ -1,4 +1,4 @@
-import {GET_ALL_GAMES,GET_GENRES, FILTER_GENRE, FILTER_ORIGIN, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND} from "./actiontypes";
+import {GET_ALL_GAMES,GET_GENRES, FILTER_GENRE, FILTER_ORIGIN, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND, GET_PLATFORMS} from "./actiontypes";
 import { filterOrigin, filterGenre, orderAlphabetical, orderRating } from "./utils";
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
     allGames: [],
     gamesToShow: [],
     genres: [],
+    platforms: [],
     filter:{
         origin: undefined,
         genre: undefined
@@ -45,10 +46,8 @@ const rootReducer = (state = initialState, {type, payload}) => {
             }else{
                 return{...state, gamesToShow: state.allGames}
             }
-            console.log(games_aux);
-            return {...state, gamesToShow: games_aux}
 
-            
+            return {...state, gamesToShow: games_aux}
 
         case GET_ALL_GAMES:
 
@@ -58,6 +57,10 @@ const rootReducer = (state = initialState, {type, payload}) => {
         case GET_GENRES:
             
             return {...state, genres: payload}
+
+        case GET_PLATFORMS:
+            
+            return {...state, platforms: payload}
 
 
         case SEARCH:

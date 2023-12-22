@@ -59,7 +59,7 @@ export const GameViewer = (props) => {
 
               let image = ""
               if(game.image){
-                image = game.image
+                image = `http://localhost:3001/images/${game.image}`
               }else{
                 image = game.background_image
               }

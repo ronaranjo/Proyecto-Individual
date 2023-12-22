@@ -1,7 +1,7 @@
 import style from "./filters.module.css"
 import { useSelector, useDispatch } from "react-redux";
 import { filterGenre, filterOrigin, orderAscend, orderType,setGames } from "../../redux/actions";
-import { useEffect } from "react";
+import { useState } from "react";
 
 
 const RAWG = "rawg.io"
@@ -12,6 +12,22 @@ const RATING = "rating"
 
 export const Filters = () => {
 
+    const [selectedButtons, setSelectedButtons] = useState([document.getElementById("ascending")])
+
+    const removeBtnSelected = (name) => {
+        setSelectedButtons(selectedButtons.filter((element) =>{
+            if(element.name === name){
+                element.classList.remove(style.btn_selected)
+
+                if (!element.classList.contains(style.btn)) {
+                    element.classList.add(style.btn)
+                }
+                
+                return true
+            }
+        }))
+    }
+
     const dispatch = useDispatch()
 
     const state = useSelector((state) => ({
@@ -21,60 +37,94 @@ export const Filters = () => {
         order: state.order
     }))
 
-    const changeOrigin = (event)=>{
+    const changeFilter = (event)=>{
+        const button = event.target
+        const filtertype = event.target.name
+        const value = event.target.value
 
-        dispatch(filterOrigin(event.target.value))
+        if (filtertype === "origin") {
+            if (state.filter.origin === value) {
+                button.classList.remove(style.btn_selected)
+                dispatch(filterOrigin(undefined))
+          
+                
+            }else{
+                button.classList.add(style.btn_selected)
+                dispatch(filterOrigin(value))
+            }
+        }else if(filtertype === "genre"){
+
+            if (state.filter.genre === value) {
+                button.classList.remove(style.btn_selected)
+                dispatch(filterGenre(undefined))   
+            }else{
+                button.classList.add(style.btn_selected)
+                dispatch(filterGenre(value))
+            }
+        }else if(filtertype === "type"){
+            if (!state.order.type === value) {
+                button.classList.remove(style.btn_selected)
+                dispatch(orderType(value))
+            }
+        }
         dispatch(setGames())
-
     }
 
-    const changeGenre = (event) => {
+    // const changeType = (event)=>{
 
-        dispatch(filterGenre(event.target.value))
-        dispatch(setGames())
+    //     const button = event.target
+    //     const type = event.target.name
+    //     const value = event.target.value
 
-    }
+    //     if(type === "type"){
+    //         if (state.order.type === value) {
+    //             button.classList.remove(style.btn_selected)
+    //             dispatch(orderType(undefined))
 
-    const changeType = (event)=>{
+    //         }else{
+    //             button.classList.add(style.btn_selected)
+    //             dispatch(orderType(undefined))
+    //         }
+    //     }else{
 
-        dispatch(orderType(event.target.value))
-        dispatch(setGames())
+    //     }
+
+    //     dispatch(orderType(event.target.value))
+    //     dispatch(setGames())
+    // }
+
+    // const changeAscend = (event) => {
         
-    }
+    //     dispatch(orderAscend(event.target.value))
+    //     dispatch(setGames())
 
-    const changeAscend = (event) => {
-        
-        dispatch(orderAscend(event.target.value))
-        dispatch(setGames())
-        console.log(state.order.ascend);
-    }
+    // }
 
 
     return(
         <div className={style.main_container}>
             <div className={style.menu}>
                 <h1 className={style.filter_name}>Origin</h1>
-                <button className={style.filter} value={RAWG} onClick={changeOrigin}>Rawg.io</button>
-                <button className={style.filter} value={DATABASE} onClick={changeOrigin}>Database</button>
-                <button className={style.filter} value={undefined} onClick={changeOrigin}>All Games</button>
+                <button className={style.btn} name="origin" value={RAWG} onClick={changeFilter}>Rawg.io</button>
+                <button className={style.btn} name="origin" value={DATABASE} onClick={changeFilter}>Database</button>
+                <button className={style.btn} name="origin" value={""} onClick={changeFilter}>All Games</button>
             </div>
 
             <div className={style.menu}>
                 <h1 className={style.filter_name}>Genre</h1>
                 {state.genres.map((genre) => {
                     return(
-                        <button className={style.filter_genre} value={genre.name} onClick={changeGenre}>{genre.name}</button>
+                        <button className={style.btn} name="genre" value={genre.name} onClick={changeFilter}>{genre.name}</button>
                     )
                 })}
             </div>
 
             <div className={style.menu}>
             <h1 className={style.filter_name}>Order</h1>
-                <button className={style.order} value={ALPHA} onClick={changeType}>{ALPHA}</button>
-                <button className={style.order} value={RATING} onClick={changeType}>{RATING}</button>
-                <button className={style.ascend} value={"a"} onClick={changeAscend}>ascendente</button>
-                <button className={style.ascend} value={"b"} onClick={changeAscend}>descendente</button>
-                
+                <button className={style.btn} name="type" value={ALPHA} onClick={changeFilter}>Alphabetic</button>
+                <button className={style.btn} name="type" value={RATING} onClick={changeFilter}>Rating</button>
+                <button className={style.btn_selected} id="ascending" name="ascend" value={"a"} onClick={changeFilter}>Ascending</button>
+                <button className={style.btn} name="ascend" value={"b"} onClick={changeFilter}>Descending</button>
             </div>
         </div>
     )
