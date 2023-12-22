@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 export const Game = (props) => {
     const{id, name, image, genres} = props
-    console.log(genres);
     return(
         <div className={style.main_container}>
             <img className={style.img} src={image} alt="" />

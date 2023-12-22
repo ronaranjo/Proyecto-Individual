@@ -16,7 +16,8 @@ export const Filters = () => {
 
     const removeBtnSelected = (name) => {
         setSelectedButtons(selectedButtons.filter((element) =>{
-            if(element.name === name){
+            if(element){
+                if(element.name === name){
                 element.classList.remove(style.btn_selected)
 
                 if (!element.classList.contains(style.btn)) {
@@ -25,6 +26,8 @@ export const Filters = () => {
                 
                 return true
             }
+            }
+            
         }))
     }
 
@@ -44,27 +47,43 @@ export const Filters = () => {
 
         if (filtertype === "origin") {
             if (state.filter.origin === value) {
-                button.classList.remove(style.btn_selected)
+                removeBtnSelected(filtertype)
                 dispatch(filterOrigin(undefined))
-          
                 
             }else{
+                removeBtnSelected(filtertype)
+                setSelectedButtons([...selectedButtons, button])
                 button.classList.add(style.btn_selected)
                 dispatch(filterOrigin(value))
             }
         }else if(filtertype === "genre"){
 
             if (state.filter.genre === value) {
-                button.classList.remove(style.btn_selected)
+                removeBtnSelected(filtertype)
                 dispatch(filterGenre(undefined))   
             }else{
+                removeBtnSelected(filtertype)
+                setSelectedButtons([...selectedButtons, button])
                 button.classList.add(style.btn_selected)
                 dispatch(filterGenre(value))
             }
         }else if(filtertype === "type"){
-            if (!state.order.type === value) {
-                button.classList.remove(style.btn_selected)
+            if(state.order.type === value) {
+                removeBtnSelected(filtertype)
+                dispatch(orderType(undefined))
+            }else{
+                removeBtnSelected(filtertype)
+                setSelectedButtons([...selectedButtons, button])
+                button.classList.add(style.btn_selected)
                 dispatch(orderType(value))
+            }
+        }else{
+            if(state.order.ascend !== value){
+                removeBtnSelected(filtertype)
+                setSelectedButtons([...selectedButtons, button])
+                button.classList.add(style.btn_selected)
+                dispatch(orderAscend(value))
+                console.log(selectedButtons);
             }
         }
         dispatch(setGames())
@@ -123,7 +142,7 @@ export const Filters = () => {
             <h1 className={style.filter_name}>Order</h1>
                 <button className={style.btn} name="type" value={ALPHA} onClick={changeFilter}>Alphabetic</button>
                 <button className={style.btn} name="type" value={RATING} onClick={changeFilter}>Rating</button>
-                <button className={style.btn_selected} id="ascending" name="ascend" value={"a"} onClick={changeFilter}>Ascending</button>
+                <button className={style.btn} id="ascending" name="ascend" value={"a"} onClick={changeFilter}>Ascending</button>
                 <button className={style.btn} name="ascend" value={"b"} onClick={changeFilter}>Descending</button>
             </div>
         </div>
