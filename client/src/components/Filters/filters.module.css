@@ -25,7 +25,7 @@
     font-weight: bold;
 }
 
-.btn{
+.btn, .btn_menu{
     background-color: black;
     width: 190px;
     height: 45px;
@@ -35,9 +35,16 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
 }
 
-.btn_selected{
+.btn:hover, .btn_menu:hover{
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+}
+
+.btn_selected, .btn_menu_selected{
     background-color: white;
     width: 190px;
     height: 45px;
@@ -47,4 +54,27 @@
     border: 3px solid black;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.btn_selected:hover, .btn_menu_selected:hover{
+    background-color: black;
+    color: white;
+}
+
+.btn_menu{
+    display: none;
+}
+
+.hideDropdownContent{
+    width: inherit;
+}
+
+@media screen and (max-width: 700px) {
+    .btn_menu{
+        display: block;
+    }
+    .hideDropdownContent {
+      display: none;
+    }
 }

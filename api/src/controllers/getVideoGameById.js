@@ -2,7 +2,7 @@ const axios = require('axios')
 require('dotenv').config();
 const {API_KEY} = process.env;
 const URL = "https://api.rawg.io/api/games"
-const {Videogame, Genre} = require("../db.js")
+const {Videogame, Genre, Platform} = require("../db.js")
 const validate = require('uuid-validate');
 
 exports.getVideoGameById = async (req, res) =>{
@@ -14,14 +14,22 @@ exports.getVideoGameById = async (req, res) =>{
                 where:{
                     id: idVideogame
                 },
-                include:{
-                    model: Genre,
-                    through:{
-                        attributes: []
+                include:[
+                    {
+                        model: Genre,
+                        through:{
+                            attributes: []
+                        }
+                    },
+                    {
+                        model: Platform,
+                        through:{
+                            attributes: []
+                        }
                     }
-                }
+                ]
             })
-            return res.status(200).json(db_game)
+            return res.status(200).json(db_game[0])
         }
 
         const response = await axios.get(`${URL}/${idVideogame}?key=${API_KEY}`)

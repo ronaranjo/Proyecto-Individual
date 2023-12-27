@@ -4,11 +4,8 @@ import { validations } from "./validations"
 import { useSelector } from "react-redux";
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'
-import { useHistory } from 'react-router-dom';
 
 export const Form = () => {
-
-    const history = useHistory();
 
     const state = useSelector((state) => ({
         genres: state.genres,
@@ -78,8 +75,7 @@ export const Form = () => {
         try {
             const response = await axios.post('http://localhost:3001/videogames', formDataToSend);
             const succes = document.getElementById("succes")
-            succes.classList.remove(style.notsucces)
-            
+            succes.classList.remove(style.notsucces)      
 
         } catch (error) {
             console.log(error.message);
@@ -127,23 +123,15 @@ export const Form = () => {
                 </div>
 
                 <div className={style.input_container} >
-
                     
                     <label className={style.label} htmlFor="description">Description</label>
                     <input className={style.input} type="text" name='description' value={gameProps.description} placeholder="Description" onChange={handleChange}/>
                     <p className={style.error}>{errors.description}</p>
                 </div>
 
-
                 <div className={style.input_container} >
     
                     <label className={style.label} htmlFor="platforms">Platforms</label>
-
-                        {/* <div className={style.selected_genres}>
-                            {gameProps.platforms.map((plat) => {
-                                <p>{plat.name}</p>
-                            })} 
-                        </div> */}
 
                     <div className={style.dropdown}>
 
@@ -162,33 +150,22 @@ export const Form = () => {
                 </div>
 
                 <div className={style.input_container} >
-
-                    
+   
                     <label className={style.label} htmlFor="plataforms">Release</label>
                     <input className={style.input} type="text" name='release' value={gameProps.release} placeholder="DD-MM-YYYY" onChange={handleChange}/>
                     <p className={style.error}>{errors.release}</p>
                 </div>
 
                 <div className={style.input_container} >
-
                     
                     <label className={style.label} htmlFor="plataforms">Rating</label>
                     <input className={style.input} type="text" name='rating' value={gameProps.rating} placeholder="0.0" onChange={handleChange}/>
                     <p className={style.error}>{errors.rating}</p>
                 </div>
 
-
                 <div className={style.input_container} >
-
-                    
-                
+           
                     <label className={style.label} htmlFor="genres">Genres</label>
-
-                        {/* <div className={style.selected_genres}>
-                            {gameProps.genres.map((genre) => {
-                                <p>{genre.name}</p>
-                            })} 
-                        </div> */}
 
                     <div className={style.dropdown}>
 
@@ -211,7 +188,6 @@ export const Form = () => {
                 <p id="succes" className={style.notsucces}>Succes! Game Added, Restarting page ...</p>
                 
             </form>
-
         </div>
     )
 }

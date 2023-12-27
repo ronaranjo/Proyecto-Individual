@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const Game = (props) => {
     const{id, name, image, genres} = props
     return(
-        <div className={style.main_container}>
+        <Link to={`/detail/${id}`} className={style.main_container}>
             <img className={style.img} src={image} alt="" />
             <p className={style.name}>{name}</p>
 
@@ -17,7 +17,7 @@ export const Game = (props) => {
                     )
                 })}
             </div>
-        </div>
+        </Link>
     )
 
     

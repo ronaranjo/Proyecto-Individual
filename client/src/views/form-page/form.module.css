@@ -8,8 +8,8 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding-right: 90px;
   height: 90.3vh;
+  width: 100%;
   overflow-y: scroll;
 }
 
@@ -23,6 +23,7 @@
   width: 500px;
   box-shadow: 10px 10px 15px solid black;
   padding-top: 20px;
+  margin-right: 100px;
   height: 90%;
 }
 
@@ -112,7 +113,7 @@
     display: inline-block;
   }
   
-  .dropbtn {
+.dropbtn {
     background-color: black;
     width: 200px;
     height: 50px;
@@ -123,7 +124,7 @@
     cursor: pointer;
   }
   
-  .dropdown_content {
+.dropdown_content {
     display: none;
     position: absolute;
     min-width: 160px;
@@ -134,11 +135,11 @@
     border: none;
   }
   
-  .dropdown:hover .dropdown_content {
+.dropdown:hover .dropdown_content {
     display: block;
   }
 
-  .content_button{
+.content_button{
     display: block;
     width: 100%;
     padding: 10px;
@@ -149,11 +150,11 @@
     transition: background-color 0.3s ease-in-out;
   }
 
-  .content_button:hover {
+.content_button:hover {
     background-color: #f4f4f4;
   }
 
-  .content_button_selected{
+.content_button_selected{
     background-color: rgb(37, 255, 201);
     display: block;
     width: 100%;
@@ -162,4 +163,26 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+  }
+
+  @media screen and (max-width: 700px) {
+    .main_container{
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .form_container{
+      width: 320px;
+      border-radius: none;
+      margin: 0;
+    }
+
+    .input_container{
+      display: contents;
+    }
+
+    .label{
+      text-align: center;
+    }
   }

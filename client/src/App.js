@@ -4,6 +4,7 @@ import {Landing} from './views/landing-page/landing'
 import { Home } from './views/home-page/home';
 import { Form } from './views/form-page/form';
 import {NavBar} from "./components/NavBar/navBar"
+import { Detail } from './views/detail/detail';
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react"
 import { getAllGames, getGenres, getPlatforms } from './redux/actions';
@@ -26,6 +27,7 @@ function App() {
         <Route exact path='/' component={Landing}></Route>
         <Route path='/home' component={Home}></Route>
         <Route path='/form' component={Form}></Route>
+        <Route path='/detail/:id' component={Detail}></Route>
       </Router>
     </div>
   );

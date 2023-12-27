@@ -1,4 +1,4 @@
-import {GET_ALL_GAMES,GET_GENRES, FILTER_GENRE, FILTER_ORIGIN, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND, GET_PLATFORMS} from "./actiontypes";
+import {GET_ALL_GAMES,GET_GENRES, FILTER_GENRE, FILTER_ORIGIN, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND, GET_PLATFORMS, CLEAR} from "./actiontypes";
 import { filterOrigin, filterGenre, orderAlphabetical, orderRating } from "./utils";
 
 const initialState = {
@@ -85,6 +85,10 @@ const rootReducer = (state = initialState, {type, payload}) => {
         case ORDER_ASCEND:
 
             return{...state, order: {...state.order, ascend: payload}}
+
+        case CLEAR:
+            
+            return{...state, filter:{ ...payload.filter }, order: {...payload.order}}
 
 
         default:

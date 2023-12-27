@@ -1,19 +1,19 @@
 import style from "./gameViewer.module.css"
 import { Game} from "../Game/game"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react"
+import { setGames } from "../../redux/actions";
 import { v4 as uuidv4, validate } from 'uuid';
 
 export const GameViewer = (props) => {
 
-    const {games} = props
+  const dispatch = useDispatch()
 
-    const conditions = useSelector((state) => ({
-      filter: state.filter,
-      order: state.order
+  const state = useSelector((state) => ({
+      gamesToShow: state.gamesToShow,
   }))
 
-    const[gamesPage, setGamesPage] = useState(games)
+    const[gamesPage, setGamesPage] = useState([])
     const[page, setPage] = useState(1)
     const[slicer, setSlicer] = useState({start: 0, end:15, limit:15})
 
@@ -30,7 +30,7 @@ export const GameViewer = (props) => {
 
     const nextPage = () =>{
     
-      if(page < Math.ceil(games.length/slicer.limit)){
+      if(page < Math.ceil(state.gamesToShow.length/slicer.limit)){
           let new_start = slicer.end
           let new_end = slicer.end + slicer.limit
 
@@ -41,16 +41,20 @@ export const GameViewer = (props) => {
     }
 
     useEffect(()=>{
+
+      dispatch(setGames())
+
+      setGamesPage(state.gamesToShow)
       
-      if(games.length < gamesPage.length){
+      if(state.gamesToShow.length < gamesPage.length){
         setSlicer({start: 0, end:15, limit:15})
         setPage(1)
       }
 
-      setGamesPage(games.slice(slicer.start, slicer.end))
+      setGamesPage(state.gamesToShow.slice(slicer.start, slicer.end))
       
         
-    },[setGamesPage, games, slicer])
+    },[setGamesPage, state, slicer])
       
     return(
       <div className={style.main_container}>
@@ -76,9 +80,9 @@ export const GameViewer = (props) => {
         </div>
 
         <div className={style.pageIndex}>
-                <button onClick={prevPage}>{"<"}</button>
-                <p className={style.page}>{page}</p>
-                <button onClick={nextPage}>{">"}</button>
+                <button className={style.btn} onClick={prevPage}>{"<"}</button>
+                <h2 className={style.page}>{page}</h2>
+                <button className={style.btn} onClick={nextPage}>{">"}</button>
         </div>
       </div>
     )
