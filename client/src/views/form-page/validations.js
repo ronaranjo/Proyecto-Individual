@@ -15,7 +15,7 @@ export const validations = (gameProps, errors, setErrors) => {
 
     //DESCRIPTION
     if(!gameProps.description) newErrors.description = REQUIRED_FIELD
-    else if(gameProps.description.length > 30) newErrors.description = "Must be fewer than 30 characters"
+    else if(gameProps.description.length > 300) newErrors.description = "Must be fewer than 300 characters"
     else newErrors.description = ""
 
     //RELEAS

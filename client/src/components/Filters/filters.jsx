@@ -16,6 +16,8 @@ export const Filters = () => {
     
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    const [allGamesSelected, setAllGameSelected] = useState(false)
+
     const removeBtnSelected = (name) => {
         setSelectedButtons(selectedButtons.filter((element) =>{
             if(element){
@@ -52,10 +54,14 @@ export const Filters = () => {
         const value = event.target.value
 
         if (filtertype === "allgames") {
+
+            
+            removeBtnSelected("origin")
             dispatch(clear())
             if (state.allGames.length <= 15) {
                 dispatch(getAllGames())
             }
+            
         }
 
         if (filtertype === "origin") {
@@ -65,6 +71,7 @@ export const Filters = () => {
                 
             }else{
                 removeBtnSelected(filtertype)
+                removeBtnSelected("allgames")
                 setSelectedButtons([...selectedButtons, button])
                 button.classList.add(style.btn_selected)
                 dispatch(filterOrigin(value))
@@ -110,7 +117,7 @@ export const Filters = () => {
             <div className={isDropdownOpen ? style.dropdownContent : style.hideDropdownContent}>
                 <div className={style.menu}>
                     <h1 className={style.filter_name}>Origin</h1>
-                    <button className={style.btn} name="allgames" value={""} onClick={changeFilter}>All Games</button>
+                    <button className={style.btn} name="allgames" value={allGamesSelected} onClick={changeFilter}>All Games</button>
                     <button className={style.btn} name="origin" value={RAWG} onClick={changeFilter}>Rawg.io</button>
                     <button className={style.btn} name="origin" value={DATABASE} onClick={changeFilter}>Database</button>
                     

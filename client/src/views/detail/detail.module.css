@@ -60,5 +60,23 @@
     overflow-y: scroll;
 }
 
+@media screen and (max-width: 700px){
+    .main_container{
+        flex-direction: column;
+    }
 
+    .main_info, .second_info{
+        width: 90%;
+        margin: 0;
+        border-radius: 10px;  
+    }
+
+    .img_container{
+        width: 95%;
+    }
+
+    .info_container{
+        width: 95%;
+    }
+}
 
