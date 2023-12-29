@@ -1,4 +1,4 @@
-import {GET_ALL_GAMES,GET_GENRES, FILTER_GENRE, FILTER_ORIGIN, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND, GET_PLATFORMS, CLEAR} from "./actiontypes";
+import {GET_ALL_GAMES,GET_GENRES, FILTER_GAMES, SEARCH, SET_GAMES, ORDER_TYPE, ORDER_ASCEND, GET_PLATFORMS, CLEAR} from "./actiontypes";
 import { filterOrigin, filterGenre, orderAlphabetical, orderRating } from "./utils";
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
     },
     order: {
         type: undefined,
-        ascend: "a"
+        ascend: undefined,
     },
 }
 
@@ -35,7 +35,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
                 }
 
                 if(state.order.type){
-                    if (state.order.type === "alpha") {
+                    if (state.order.type === "alphabetic") {
                         games_aux = orderAlphabetical(state.order.ascend, games_aux)
 
                     }else if(state.order.type === "rating"){
@@ -53,10 +53,11 @@ const rootReducer = (state = initialState, {type, payload}) => {
 
             return {...state, allGames: payload}
 
-        
+
         case GET_GENRES:
             
             return {...state, genres: payload}
+
 
         case GET_PLATFORMS:
             
@@ -68,23 +69,14 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {...state, allGames: payload}
 
                 
-        case FILTER_ORIGIN:
-            return{...state, filter: {...state.filter, origin: payload}}
-
-        
-        case FILTER_GENRE:
+        case FILTER_GAMES:
             
-            return{...state, filter: {...state.filter, genre: payload}}
+            return{...state, filter: {...state.filter, [payload.type]: payload.value}}
 
 
         case ORDER_TYPE:
 
-            return{...state, order: {...state.order, type: payload}}
-
-
-        case ORDER_ASCEND:
-
-            return{...state, order: {...state.order, ascend: payload}}
+            return{...state, order: {...state.order, [payload.type]: payload.value}}
 
         case CLEAR:
             

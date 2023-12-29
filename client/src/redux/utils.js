@@ -42,7 +42,7 @@ export const filterGenre = (genre_name, allGames) => {
 
 export const orderAlphabetical = (ascend, allGames) => {
 
-    if(ascend === "a"){
+    if(ascend === "a" || !ascend){
         return allGames.sort((a,b) => {
 
             if (a.name.toLowerCase() < b.name.toLowerCase()) {
@@ -70,7 +70,7 @@ export const orderAlphabetical = (ascend, allGames) => {
 
 export const orderRating = (ascend, allGames) => {
 
-    if(ascend === "a"){
+    if(ascend === "a" || !ascend){
         return allGames.sort((a,b) => {
             return a.rating - b.rating
         })

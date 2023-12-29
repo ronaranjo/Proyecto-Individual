@@ -17,11 +17,11 @@ const storage = multer.diskStorage({
 exports.upload = multer({ storage });
 
 exports.postVideoGame = async (req, res) => {
-    const{id, name, description, platforms, release, rating, genres} = req.body
+    const{id, name, description, platforms, released, rating, genres} = req.body
     const image = req.file
     console.log(req.body);
 
-    if(!id || !name || !description || !platforms || !image || !release ||!rating || !genres || !genres.length){
+    if(!id || !name || !description || !platforms || !image || !released ||!rating || !genres || !genres.length){
         fs.unlink(image .path, (error) => {
           console.log(error);
         });
@@ -29,7 +29,7 @@ exports.postVideoGame = async (req, res) => {
 
     try {
         const [videogame, created] = await Videogame.findOrCreate({
-            where: {id, name, description, image: image.filename, release, rating},
+            where: {id, name, description, image: image.filename, released, rating},
         })
 
         if(!created){

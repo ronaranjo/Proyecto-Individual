@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
       defaultValue: ""
     },
 
-    release:{
+    released:{
       type: DataTypes.STRING,
       allowNull: false
     },

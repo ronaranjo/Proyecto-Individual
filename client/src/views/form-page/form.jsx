@@ -18,7 +18,7 @@ export const Form = () => {
         image: undefined,
         description: undefined,
         platforms: [],
-        release:undefined,
+        released:undefined,
         rating: undefined,
         genres:[]
 

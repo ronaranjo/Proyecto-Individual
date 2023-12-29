@@ -83,17 +83,10 @@ export const Detail = () => {
                     })}
                 </div>
 
-                <h2>Release</h2>
-                <h2>{game.release}</h2>
+                <h2>Released</h2>
+                <h2>{game.released}</h2>
             </div>
         </div>
     )
-// ID.
-// Nombre.
-// Imagen.
-// Plataformas.
-// Descripción.
-// Fecha de lanzamiento.
-// Rating.
-// Géneros.
+
 }
