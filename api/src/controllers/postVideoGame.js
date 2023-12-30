@@ -3,11 +3,11 @@ const path = require('path');
 const multer = require('multer');
 const fs = require("fs");
 
-const destination = path.join(__dirname, '../images'); // Directorio donde se guardarán las imágenes
+const destination = path.join(__dirname, '../images');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, destination); // Ruta donde se guardarán las imágenes
+    cb(null, destination);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);

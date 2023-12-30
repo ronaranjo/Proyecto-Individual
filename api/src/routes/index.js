@@ -19,12 +19,4 @@ router.get("/images/:name", getImage)
 router.get("/genres", getGenres)
 router.get("/platforms", getPlatforms)
 
-
-//ARREGLAR SEARCH
-
-
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-
 module.exports = router;

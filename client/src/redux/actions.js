@@ -1,4 +1,4 @@
-import {GET_ALL_GAMES,GET_GENRES, GET_PLATFORMS, SET_GAMES, FILTER_GAMES, ORDER_TYPE, ORDER_ASCEND, SEARCH, CLEAR} from "./actiontypes";
+import {GET_ALL_GAMES,GET_GENRES, GET_PLATFORMS, SET_GAMES, FILTER_GAMES, SORT_GAMES, SEARCH, CLEAR} from "./actiontypes";
 import axios from "axios"
 const URL_GAMES= "http://localhost:3001/videogames"
 const URL_GENRES= "http://localhost:3001/genres"
@@ -77,17 +77,10 @@ export const filterGames = (value, type) => {
     }
 }
 
-export const orderType = (value, type) => {
+export const sortGames = (value, type) => {
     return{
-        type: ORDER_TYPE,
+        type: SORT_GAMES,
         payload: {value, type}
-    }
-}
-
-export const orderAscend = (value) => {
-    return{
-        type: ORDER_ASCEND,
-        payload: value
     }
 }
 

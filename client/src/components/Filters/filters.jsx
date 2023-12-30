@@ -1,6 +1,6 @@
 import style from "./filters.module.css"
 import { useSelector, useDispatch } from "react-redux";
-import { clear, filterGames, getAllGames, orderAscend, orderType,setGames } from "../../redux/actions";
+import { clear, filterGames, getAllGames, orderAscend, sortGames, setGames, sortGamesetGames } from "../../redux/actions";
 import { useEffect, useState } from "react";
 
 
@@ -85,13 +85,13 @@ export const Filters = () => {
             if(state.order[filtertype] === value) {
                 removeBtnSelected(filtertype)
                 removeBtnSelected(ASCEND)
-                dispatch(orderType(undefined, filtertype))
+                dispatch(sortGames(undefined, filtertype))
 
             }else{
                 removeBtnSelected(filtertype)
                 setSelectedButtons([...selectedButtons, button])
                 button.classList.add(style.btn_selected)
-                dispatch(orderType(value, filtertype))
+                dispatch(sortGames(value, filtertype))
             }
         }
         dispatch(setGames())
