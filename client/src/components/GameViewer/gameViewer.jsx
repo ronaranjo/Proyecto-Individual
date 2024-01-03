@@ -12,7 +12,7 @@ export const GameViewer = () => {
       gamesToShow: state.gamesToShow,
   }))
 
-    const[gamesPage, setGamesPage] = useState([])
+    const[gamesPage, setGamesPage] = useState([...state.gamesToShow])
     const[page, setPage] = useState(1)
     const[slicer, setSlicer] = useState({start: 0, end:15, limit:15})
     
@@ -39,6 +39,7 @@ export const GameViewer = () => {
       }  
     }
 
+
     useEffect(()=>{
 
       if (!state.gamesToShow.length) {
@@ -52,7 +53,7 @@ export const GameViewer = () => {
   
       setGamesPage(state.gamesToShow.slice(slicer.start, slicer.end))
       
-    },[, state.gamesToShow, slicer])
+    },[ state.gamesToShow, slicer])
       
     return(
       <div className={style.main_container}>
