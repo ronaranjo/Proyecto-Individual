@@ -1,9 +1,10 @@
 const axios = require('axios')
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.rawg.io/api/games"
 const {Videogame, Genre, Platform} = require("../db.js")
 const validate = require('uuid-validate');
+
+const URL = "https://api.rawg.io/api/games"
 
 exports.getVideoGameById = async (req, res) =>{
     const {idVideogame} = req.params
@@ -29,6 +30,11 @@ exports.getVideoGameById = async (req, res) =>{
                     }
                 ]
             })
+
+            if (!db_game.length) {
+                return res.status(404).json("Not Found")
+            }
+            
             return res.status(200).json(db_game[0])
         }
 

@@ -1,15 +1,16 @@
 const axios = require('axios')
 require('dotenv').config();
-const {API_KEY} = process.env;
-const URL = "https://api.rawg.io/api"
 const {Genre} = require("../db.js")
 const { v4: uuidv4 } = require('uuid');
+const {API_KEY} = process.env;
+
+const URL = "https://api.rawg.io/api/genres"
 
 exports.getGenres = async (req, res) => {
     try {
         let genres_db = await Genre.findAll()
         if(!genres_db.length){
-            const response = await axios.get(`${URL}/genres?key=${API_KEY}`)
+            const response = await axios.get(`${URL}?key=${API_KEY}`)
             const genres_array = response.data.results
             
 
@@ -19,7 +20,7 @@ exports.getGenres = async (req, res) => {
                 const id = uuidv4()
                 const [genres, created] = await Genre.findOrCreate({
                     where: {id, name: name},
-                    
+ 
                 })
             }
         }

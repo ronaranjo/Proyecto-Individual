@@ -1,15 +1,16 @@
 const axios = require('axios')
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.rawg.io/api"
 const {Platform} = require("../db.js")
 const { v4: uuidv4 } = require('uuid');
+
+const URL = "https://api.rawg.io/api/platforms"
 
 exports.getPlatforms = async (req, res) => {
     try {
         let platforms_db = await Platform.findAll()
         if(!platforms_db.length){
-            const response = await axios.get(`${URL}/platforms?key=${API_KEY}`)
+            const response = await axios.get(`${URL}?key=${API_KEY}`)
             const platforms_array = response.data.results
 
             for (let i = 0; i < platforms_array.length; i++) {
