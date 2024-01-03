@@ -3,9 +3,8 @@ import { Game} from "../Game/game"
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react"
 import { setGames } from "../../redux/actions";
-import { v4 as uuidv4, validate } from 'uuid';
 
-export const GameViewer = (props) => {
+export const GameViewer = () => {
 
   const dispatch = useDispatch()
 
@@ -16,7 +15,7 @@ export const GameViewer = (props) => {
     const[gamesPage, setGamesPage] = useState([])
     const[page, setPage] = useState(1)
     const[slicer, setSlicer] = useState({start: 0, end:15, limit:15})
-
+    
     const prevPage = () =>{
         if(page > 1){
             let new_start = slicer.start - slicer.limit
@@ -42,19 +41,18 @@ export const GameViewer = (props) => {
 
     useEffect(()=>{
 
-      dispatch(setGames())
+      if (!state.gamesToShow.length) {
+        dispatch(setGames());
+      }
 
-      setGamesPage(state.gamesToShow)
-      
       if(state.gamesToShow.length < gamesPage.length){
         setSlicer({start: 0, end:15, limit:15})
         setPage(1)
       }
-
+  
       setGamesPage(state.gamesToShow.slice(slicer.start, slicer.end))
       
-        
-    },[setGamesPage, state, slicer])
+    },[, state.gamesToShow, slicer])
       
     return(
       <div className={style.main_container}>

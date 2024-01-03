@@ -5,21 +5,14 @@ const fs = require("fs")
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
 
-        const directorioDestino = './src/images';
-        fs.mkdirSync(directorioDestino, { recursive: true });
-        cb(null, directorioDestino);
+        const destinationDirectory = './src/images';
+        fs.mkdirSync(destinationDirectory, { recursive: true });
+        cb(null, destinationDirectory);
     },
     filename: (req, file, cb) => {
-        const nombreArchivo = `${Date.now()}-${file.originalname}`;
-        cb(null, nombreArchivo);
+        const fileName = `${Date.now()}-${file.originalname}`;
+        cb(null, fileName);
     }
 });
 
 exports.upload = multer({ storage });
-
-exports.saveImage = (req, res) => {
-
-    const rutaImagen = req.file;
-    console.log('Ruta de la imagen guardada:', rutaImagen);
-    res.send('Imagen subida exitosamente.');
-}

@@ -94,7 +94,7 @@ export const clear = () => {
             },
             order: {
                 type: undefined,
-                ascend: "a"
+                ascend: undefined
             },
         }
     }

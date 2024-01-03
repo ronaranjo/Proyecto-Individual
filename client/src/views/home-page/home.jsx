@@ -2,13 +2,12 @@ import style from "./home.module.css"
 import{ GameViewer } from "../../components/GameViewer/gameViewer"
 import { Filters } from "../../components/Filters/filters"
 import { SearchBar } from "../../components/SearchBar/searchBar"
-import { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux";
-import { getAllGames, setGames } from "../../redux/actions";
+import { useEffect } from "react"
+import { useDispatch } from "react-redux";
+import { setGames } from "../../redux/actions";
 
 
 export const Home = () => {
-    
 
     return (
         <div className={style.main_container}>

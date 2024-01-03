@@ -1,7 +1,7 @@
 import style from "./filters.module.css"
 import { useSelector, useDispatch } from "react-redux";
-import { clear, filterGames, getAllGames, orderAscend, sortGames, setGames, sortGamesetGames } from "../../redux/actions";
-import { useEffect, useState } from "react";
+import { clear, filterGames, getAllGames, sortGames, setGames, } from "../../redux/actions";
+import { useState } from "react";
 
 
 const RAWG = "rawg.io"
@@ -16,7 +16,7 @@ const TYPE = "type"
 
 export const Filters = () => {
 
-    const [selectedButtons, setSelectedButtons] = useState([document.getElementById("ascending")])
+    const [selectedButtons, setSelectedButtons] = useState([])
     
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

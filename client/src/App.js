@@ -5,8 +5,8 @@ import { Home } from './views/home-page/home';
 import { Form } from './views/form-page/form';
 import {NavBar} from "./components/NavBar/navBar"
 import { Detail } from './views/detail/detail';
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux";
+import { useEffect } from "react"
 import { getAllGames, getGenres, getPlatforms } from './redux/actions';
 
 function App() {

@@ -4,9 +4,8 @@ const { getVideoGameById } = require("../controllers/getVideoGameById")
 const { postVideoGame } = require("../controllers/postVideoGame")
 const { searchGames } = require("../controllers/searchVideoGame")
 const {getGenres} = require("../controllers/getGenres")
-const {saveImage, upload} = require("../controllers/utils/postImage");
+const { upload} = require("../controllers/utils/postImage");
 const { getImage } = require('../controllers/getImage');
-const path = require('path');
 const { getPlatforms } = require('../controllers/getPlatforms');
 
 const router = Router();

@@ -1,9 +1,10 @@
 const axios = require('axios')
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.rawg.io/api/games"
 const {Videogame, Genre} = require("../db.js")
-const { Op, Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
+
+const URL = "https://api.rawg.io/api/games"
 
 exports.searchGames = async (req, res) => {
     const {name} = req.query
